@@ -22,7 +22,7 @@ const {GMAIL_APP_USER, GMAIL_APP_PASSWORD, GMAIL_APP_EMAIL_TO} = process.env;
 
 // selectAll().then(rows => generateHTMLTable(rows)).then(html => mailOptions.html = html);
 
-function sendMail(html) {
+function sendMail(csv, html) {
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -32,10 +32,18 @@ function sendMail(html) {
         }
     });
     
+    const today = new Date();
+    const filename = `${today.getFullYear()}-${today.getMonth().toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}-2023-Pub-17-Response-Ratings.csv`;
+
     const mailOptions = {
         from: GMAIL_APP_USER,
         to: GMAIL_APP_EMAIL_TO,
         subject: 'Daily Ratings from Pub 17 App',
+        attachments: [{
+            filename: filename,
+            content: csv,
+            contentType: 'text/csv'
+        }],
         html: html
     };
 
@@ -45,8 +53,14 @@ function sendMail(html) {
     });
 }
 
-(async () => {
-    const rows = await selectAll();
-    const html = await generateHTMLTable(rows);
-    sendMail(html);
+;(async () => {
+    try {
+        const rows = await selectAll();
+        const csv = converter.json2csv(rows, {checkSchemaDifferences: true, emptyFieldValue: null, delimiter: {field: "|"}});
+        const html = await generateHTMLTable(rows);
+        sendMail(csv, html);
+    } catch (error) {
+        console.log(error);
+        console.log('Error sending email');
+    }
 })();
