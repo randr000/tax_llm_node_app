@@ -49,7 +49,7 @@ function insertInto({userMsg, botMsg, ratingValue}) {
     const query = () => {
         const sql = `
         INSERT INTO query_ratings (user_query, bot_response, rating)
-        VALUES (${esc(userMsg, connection)}, ${esc(botMsg, connection)}, ${esc(ratingValue, connection)});
+        VALUES (${esc(userMsg.slice(0, 300), connection)}, ${esc(botMsg.slice(0, 5000), connection)}, ${esc(ratingValue, connection)});
         `;
         connection.query({...connTimeout, sql: sql}, (error, results, fields) => {
             if (error) console.log(error);
