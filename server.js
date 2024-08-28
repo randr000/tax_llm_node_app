@@ -21,4 +21,3 @@ app.post('/rating', (req, res) => {
 });
 
 app.listen(process.env.PORT);
-
