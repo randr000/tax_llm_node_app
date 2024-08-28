@@ -1,5 +1,4 @@
 const fs = require('fs');
-const { selectAll } = require('./mysqlQueries');
 
 function generateHTMLTable(rows) {
     return new Promise((resolve, reject) => {
@@ -25,4 +24,4 @@ function generateHTMLTable(rows) {
 
 }
 
-selectAll().then(rows => generateHTMLTable(rows)).then(r => console.log(r));
+exports.generateHTMLTable = generateHTMLTable;
