@@ -23,14 +23,22 @@ function handleConnections(func) {
 }
 
 function selectAll() {
-    const query = () => {
-        const sql = "SELECT * FROM query_ratings;";
-        connection.query({...connTimeout, sql: sql}, (error, results, fields) => {
-            if (error) console.log(error);
-            else console.log(`results: ${results}`);
-        });
-    };
-    handleConnections(query);
+
+    return new Promise((resolve, reject) => {
+        const query = () => {
+            const sql = "SELECT * FROM query_ratings;";
+            connection.query({...connTimeout, sql: sql}, (error, results, fields) => {
+                if (error) {
+                    console.log(error);
+                    reject(error);
+                }
+                else {
+                    resolve(results);
+                };
+            });
+        };
+        handleConnections(query);
+    });
 }
 
 function insertInto({userMsg, botMsg, ratingValue}) {
