@@ -1,8 +1,8 @@
 const cron = require('node-cron');
 const mailer = require('./mailer');
 
-// Run everyday at 10pm
-cron.schedule('0 10 * * *', () => {
+// Run once everyday at 10pm
+cron.schedule('0 22 * * *', () => {
     mailer();
     console.log('cron ran');
 });
