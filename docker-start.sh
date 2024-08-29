@@ -1,3 +1,2 @@
 #!/bin/bash
-node server.js
-node cronJobMail.js
+node server.js & node cronJobMail.js

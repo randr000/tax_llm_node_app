@@ -17,7 +17,7 @@ function sendMail(csv, html) {
     });
     
     const today = new Date();
-    const dateStr = `${today.getFullYear()}-${today.getMonth().toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`
+    const dateStr = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`
     const subject = `Daily Ratings from Pub 17 App ${dateStr}`;
     const filename = `${dateStr}-2023-Pub-17-Response-Ratings.csv`;
 
@@ -53,7 +53,5 @@ const mailer = async (deleteAllRecords=true) => {
         console.log('Error sending email');
     }
 };
-
-mailer(false);
 
 module.exports = mailer;
