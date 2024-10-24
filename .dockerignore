@@ -5,3 +5,4 @@ sample.env
 .dockerignore
 Dockerfile
 README.md
+email.png
