@@ -44,7 +44,7 @@ Here is a sample configuration for a Docker compose YAML file in order to run th
       - mysql-rating-db.env
 ```
 The initialization scripts will run in alphanumeric order. Save them in the init folder that will be mounted to docker-entrypoint-initdb.d in the MySQL docker container.
-<br>
+<br><br>
 Filename: 0.sh
 ```bash
 mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};"
