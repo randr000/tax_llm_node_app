@@ -1,6 +1,6 @@
 # Tax RAG App - Database and Mailer Service
 
-[Front-End Site](https://taxragapp.vercel.app/)
+[Front-End Site](https://taxragapp.vercel.app/)<br>
 [Front-End Site GitHub](https://github.com/randr000/tax_llm_next_app)
 
 ### This service is comprised of two components:
