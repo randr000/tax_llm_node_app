@@ -1,21 +1,19 @@
 # Tax RAG App - Database and Mailer Service
 
-[Front-End Site](https://taxragapp.vercel.app/)<br>
-[Front-End Site GitHub](https://github.com/randr000/tax_llm_next_app)
-
 ### This service is comprised of two components:
-### 1. A MySQL database that stores the user ratings of bot responses
-### 2. An email service that sends an email with a table of all user ratings for a specific day
+1. A MySQL database that stores the user ratings of bot responses.
+1. An email service that sends an email with a table of all user ratings for a specific day.
 
-Install project dependencies
+Install project dependencies:
 
 ```bash
 npm install
 ```
-copy sample.env and insert environment variables
+Copy sample.env:
 ```bash
 cp sample.env .env
 ```
+Add environment variable values to .env file:
 ```
 PORT=<Port the service will run on>
 MYSQL_DATABASE=<insert your own database name>
@@ -29,7 +27,7 @@ GMAIL_APP_EMAIL_TO=<Gmail account where you will send emails to>
 ```
 Download the official MySQL Docker image. Instructions are located [here](https://hub.docker.com/_/mysql).
 
-Here is a sample configuration for a Docker compose YAML file:
+Here is a sample configuration for a Docker compose YAML file in order to run the MySQL Docker container:
 ```yml
   mysql-rating-db:
     image: mysql:latest
@@ -68,14 +66,24 @@ mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e "CREATE USER ${MYSQL_USER}@localhost ID
 mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e "GRANT SELECT, INSERT, DELETE, UPDATE ON query_ratings TO '${MYSQL_USER}'@'localhost';"
 mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e "FLUSH PRIVILEGES;"
 ```
-To start the backend service that stores the ratings in the MySQL database
+From the directory where the YAML file is located, type the following the terminal to start the MySQL Docker container:
+```bash
+docker compose up
+```
+To start the backend service that stores the ratings in the MySQL database:
 ```bash
 node server.js
 ```
-To create the cron job that schdules the email that will be sent once a day. Previous ratings are automatically deleted from the database when the email is sent.
+To create the cron job that schedules the email that will be sent once a day (Execute in a separate terminal window if previous command was not set to run in background):
 ```bash
 node cronJobMail.js
 ```
-Sample email:
+Previous ratings are automatically deleted from the database when the email is sent.
+<br>
+### Sample email:
 ![image](email.png)
 It is recommended to run this service within a Docker container. The Dockerfile located in the project's root directly can be used to create the image.
+
+## Front-End Links
+[Front-End Site Live](https://taxragapp.vercel.app/)<br>
+[Front-End Site README](https://github.com/randr000/tax_llm_next_app)
