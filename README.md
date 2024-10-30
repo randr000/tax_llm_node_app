@@ -1,5 +1,7 @@
 # Tax RAG App - Database and Mailer Service
 
+[Front-End Site](https://github.com/randr000/tax_llm_next_app)
+
 ### This service is comprised of two components:
 ### 1. A MySQL database that stores the user ratings of bot responses
 ### 2. An email service that sends an email with a table of all user ratings for a specific day
